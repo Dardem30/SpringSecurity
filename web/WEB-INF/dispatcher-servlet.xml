@@ -44,13 +44,28 @@
     </bean>
     <bean id="daoEmployee" class="by.dao.DaoEmploee">
     <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"></property>
+</bean>
+    <bean id="daoUser" class="by.dao.UserDAO">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"></property>
+    </bean>
+    <bean id="daoRole" class="by.dao.RoleDAO">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"></property>
+    </bean>
+    <bean id="serviceRole" class="by.service.ServiceRole">
+        <property name="roleDAO" ref="daoRole"/>
     </bean>
     <bean id="serviceEmployee"  class="by.service.ServiceEmployee" >
         <property name="daoEmploee" ref="daoEmployee"></property>
+    </bean>
+    <bean id="serviceUser"  class="by.service.ServiceUser" >
+        <property name="userDAO" ref="daoUser"></property>
     </bean>
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"></property>
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
+    <!--<bean id="customAuthenticationProvider" class="by.service.AuthenticationCustom">-->
+        <!--<property name="serviceUser" ref="serviceUser"/>-->
+    <!--</bean>-->
 </beans>

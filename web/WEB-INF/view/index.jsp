@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
+<form id="logoutForm" method="POST" action="${contextPath}/logout">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+</form>
+
+<h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.getElementById('logoutForm').submit()">Logout</a></h2>
 <form action="/add" method="get">
     <input type="text" name="name">
     <input type="submit" value="add">
